@@ -1,0 +1,6 @@
+{
+    "host": "localhost",
+    "database": "btes_test_db",
+    "user": "root",
+    "password": "root"
+}

@@ -1,0 +1,145 @@
+{
+    "users": [
+        {
+            "username": "testuser1",
+            "password": "Test@123",
+            "email": "testuser1@example.com",
+            "first_name": "Test",
+            "last_name": "User1"
+        },
+        {
+            "username": "testuser2",
+            "password": "Test@123",
+            "email": "testuser2@example.com",
+            "first_name": "Test",
+            "last_name": "User2"
+        },
+        {
+            "username": "testuser3",
+            "password": "Test@123",
+            "email": "testuser3@example.com",
+            "first_name": "Test",
+            "last_name": "User3"
+        },
+        {
+            "username": "invalid_user",
+            "password": "Invalid@123",
+            "email": "invalid@example",
+            "first_name": "",
+            "last_name": ""
+        }
+    ],
+    "courses": [
+        {
+            "course_name": "Test Course 1",
+            "course_code": "TC101",
+            "description": "Test course description 1",
+            "instructor_id": 2
+        },
+        {
+            "course_name": "Test Course 2",
+            "course_code": "TC102",
+            "description": "Test course description 2",
+            "instructor_id": 3
+        },
+        {
+            "course_name": "Test Course 3",
+            "course_code": "TC103",
+            "description": "Test course description 3",
+            "instructor_id": 2
+        }
+    ],
+    "enrollments": [
+        {
+            "user_id": 4,
+            "course_id": 2,
+            "completion_status": "not_started"
+        },
+        {
+            "user_id": 5,
+            "course_id": 3,
+            "completion_status": "in_progress"
+        },
+        {
+            "user_id": 6,
+            "course_id": 1,
+            "completion_status": "completed"
+        },
+        {
+            "user_id": 999,
+            "course_id": 1,
+            "completion_status": "not_started"
+        }
+    ],
+    "assignments": [
+        {
+            "course_id": 1,
+            "title": "Test Assignment 1",
+            "description": "Test assignment description 1",
+            "due_date": "2024-12-31 23:59:59",
+            "max_score": 100
+        },
+        {
+            "course_id": 2,
+            "title": "Test Assignment 2",
+            "description": "Test assignment description 2",
+            "due_date": "2024-12-31 23:59:59",
+            "max_score": 150
+        },
+        {
+            "course_id": 999,
+            "title": "Invalid Assignment",
+            "description": "This assignment has an invalid course ID",
+            "due_date": "2024-12-31 23:59:59",
+            "max_score": 100
+        }
+    ],
+    "submissions": [
+        {
+            "assignment_id": 1,
+            "user_id": 4,
+            "submission_text": "Test submission 1",
+            "file_path": "test_file_1.txt"
+        },
+        {
+            "assignment_id": 2,
+            "user_id": 5,
+            "submission_text": "Test submission 2",
+            "file_path": "test_file_2.txt"
+        },
+        {
+            "assignment_id": 999,
+            "user_id": 4,
+            "submission_text": "Invalid submission",
+            "file_path": "invalid.txt"
+        }
+    ],
+    "grades": [
+        {
+            "submission_id": 1,
+            "score": 85,
+            "feedback": "Good work on the test submission"
+        },
+        {
+            "submission_id": 2,
+            "score": 140,
+            "feedback": "Excellent work on the test submission"
+        },
+        {
+            "submission_id": 999,
+            "score": 90,
+            "feedback": "Invalid submission ID"
+        },
+        {
+            "submission_id": 1,
+            "score": 999,
+            "feedback": "Score exceeds maximum"
+        }
+    ],
+    "queries": {
+        "user_courses": "SELECT c.course_name, c.course_code, e.completion_status FROM enrollments e JOIN courses c ON e.course_id = c.id WHERE e.user_id = %s",
+        "course_students": "SELECT u.username, u.first_name, u.last_name, e.completion_status FROM enrollments e JOIN users u ON e.user_id = u.id WHERE e.course_id = %s",
+        "assignment_submissions": "SELECT u.username, s.submission_date, s.score FROM assignment_submissions s JOIN users u ON s.user_id = u.id WHERE s.assignment_id = %s",
+        "user_grades": "SELECT c.course_name, a.title, s.score, s.feedback FROM assignment_submissions s JOIN assignments a ON s.assignment_id = a.id JOIN courses c ON a.course_id = c.id WHERE s.user_id = %s"
+    }
+}

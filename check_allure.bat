@@ -1,12 +1,4 @@
 @echo off
-echo Installing required Python packages...
-
-pip install -r requirements.txt
-
-echo.
-echo Python packages installed successfully.
-echo.
-
 echo Checking if Allure is installed...
 
 where allure >nul 2>nul

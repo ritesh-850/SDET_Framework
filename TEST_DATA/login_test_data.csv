@@ -1,0 +1,7 @@
+username,password,expected_title,expected_result
+ritesh@123,Ritesh@123,Dashboard,pass
+admin,Admin@123,Dashboard,pass
+invalid_user,invalid_password,Log in,fail
+ritesh@123,WrongPassword,Log in,fail
+,Ritesh@123,Log in,fail
+ritesh@123,,Log in,fail
