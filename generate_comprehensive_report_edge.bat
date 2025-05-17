@@ -17,7 +17,7 @@ echo ===================================================
 echo.
 
 REM Run Login tests
-python -m pytest -v TEST_CLASS/Test_Login.py TEST_CLASS/Test_Login_DataDriven.py::TestLoginDataDriven::test_login_with_different_credentials[ritesh@123-Ritesh@123-Dashboard-pass] --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_Login.py .\TEST_CLASS\Test_Login_DataDriven.py::TestLoginDataDriven::test_login_with_different_credentials[ritesh@123-Ritesh@123-Dashboard-pass] --alluredir=allure-results
 
 echo.
 echo ===================================================
@@ -26,7 +26,7 @@ echo ===================================================
 echo.
 
 REM Run Dashboard tests
-python -m pytest -v TEST_CLASS/Test_Dashboard.py --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_Dashboard.py --alluredir=allure-results
 
 echo.
 echo ===================================================
@@ -35,7 +35,7 @@ echo ===================================================
 echo.
 
 REM Run Profile tests
-python -m pytest -v TEST_CLASS/Test_Profile.py --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_Profile.py --alluredir=allure-results
 
 echo.
 echo ===================================================
@@ -44,7 +44,7 @@ echo ===================================================
 echo.
 
 REM Run Logout tests
-python -m pytest -v TEST_CLASS/Test_Logout.py --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_Logout.py --alluredir=allure-results
 
 echo.
 echo ===================================================
@@ -53,7 +53,7 @@ echo ===================================================
 echo.
 
 REM Run Course Content tests
-python -m pytest -v TEST_CLASS/Test_CourseContent.py --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_CourseContent.py --alluredir=allure-results
 
 echo.
 echo ===================================================
@@ -62,7 +62,7 @@ echo ===================================================
 echo.
 
 REM Run Assignment tests
-python -m pytest -v TEST_CLASS/Test_Assignment.py --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS\Test_Assignment.py --alluredir=allure-results
 
 echo.
 echo ===================================================

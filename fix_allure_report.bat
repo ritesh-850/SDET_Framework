@@ -1,6 +1,6 @@
-@echo off
+ @echo off
 echo ===================================================
-echo Generating Allure Report and Opening in Edge
+echo Fixing Allure Report Generation
 echo ===================================================
 echo.
 
@@ -12,12 +12,12 @@ mkdir allure-results
 
 echo.
 echo ===================================================
-echo Running Tests...
+echo Running Tests with Full Path...
 echo ===================================================
 echo.
 
-REM Run a selection of tests
-python -m pytest -v .\TEST_CLASS\Test_Login.py .\TEST_CLASS\Test_Dashboard.py .\TEST_CLASS\Test_Profile.py --alluredir=allure-results
+REM Run tests with full path
+python -m pytest -v .\TEST_CLASS\Test_Login.py --alluredir=allure-results
 
 echo.
 echo ===================================================

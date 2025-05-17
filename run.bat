@@ -16,7 +16,7 @@ echo ===================================================
 echo.
 
 REM Run tests with Allure reporting
-python -m pytest -v TEST_CLASS --alluredir=allure-results
+python -m pytest -v .\TEST_CLASS --alluredir=allure-results
 
 echo.
 echo ===================================================
