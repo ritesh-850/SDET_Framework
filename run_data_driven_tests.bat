@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo Running Database Tests
+echo Running Data-Driven Tests
 echo ===================================================
 echo.
 
@@ -11,12 +11,12 @@ mkdir allure-results
 
 echo.
 echo ===================================================
-echo Running Database Tests...
+echo Running Data-Driven Tests...
 echo ===================================================
 echo.
 
-REM Run database tests with Allure reporting
-python -m pytest -v .\DB_TESTS\ --alluredir=allure-results
+REM Run data-driven tests with Allure reporting
+python -m pytest -v .\DATA_DRIVEN_TESTS\ --alluredir=allure-results
 
 echo.
 echo ===================================================

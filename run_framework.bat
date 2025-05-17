@@ -18,7 +18,7 @@ echo 7. Generate Allure report from existing results
 echo 8. Exit
 echo.
 
-set /p choice=Enter your choice (1-8): 
+set /p choice=Enter your choice (1-8):
 
 if "%choice%"=="1" goto run_all
 if "%choice%"=="2" goto run_ui
@@ -46,7 +46,7 @@ IF EXIST allure-results rmdir /s /q allure-results
 mkdir allure-results
 
 REM Run all tests with Allure reporting
-python -m pytest -v TEST_CLASS/ --alluredir=allure-results
+python -m pytest -v TEST_CLASS/ DB_TESTS/ DATA_DRIVEN_TESTS/ --alluredir=allure-results
 
 goto generate_report
 
@@ -80,7 +80,7 @@ IF EXIST allure-results rmdir /s /q allure-results
 mkdir allure-results
 
 REM Run database tests
-python -m pytest -v TEST_CLASS/Test_Database.py TEST_CLASS/Test_Login_DB_Validation.py --alluredir=allure-results
+python -m pytest -v .\DB_TESTS\ --alluredir=allure-results
 
 goto generate_report
 
@@ -97,7 +97,7 @@ IF EXIST allure-results rmdir /s /q allure-results
 mkdir allure-results
 
 REM Run data-driven login tests
-python -m pytest -v TEST_CLASS/Test_Login_DataDriven.py --alluredir=allure-results
+python -m pytest -v .\DATA_DRIVEN_TESTS\ --alluredir=allure-results
 
 goto generate_report
 
@@ -108,21 +108,41 @@ echo Available test classes:
 echo ================================================================
 echo.
 
-REM List all test classes
+echo Test classes in TEST_CLASS directory:
 dir /b TEST_CLASS\Test_*.py
 
 echo.
-set /p test_class=Enter the test class name (without path, e.g., Test_Login.py): 
+echo Test classes in DB_TESTS directory:
+dir /b DB_TESTS\Test_*.py
 
-if not exist "TEST_CLASS\%test_class%" (
-    echo Test class not found: %test_class%
+echo.
+echo Test classes in DATA_DRIVEN_TESTS directory:
+dir /b DATA_DRIVEN_TESTS\Test_*.py
+
+echo.
+echo Enter the test class name with its directory (e.g., TEST_CLASS\Test_Login.py)
+echo or just the class name if it's in TEST_CLASS directory (e.g., Test_Login.py)
+set /p test_path=Enter the test path:
+
+REM Check if the path includes a directory
+echo %test_path% | findstr /C:"\\"
+if %errorlevel% EQU 0 (
+    REM Path includes directory
+    set full_path=%test_path%
+) else (
+    REM Path is just a filename, assume TEST_CLASS directory
+    set full_path=TEST_CLASS\%test_path%
+)
+
+if not exist "%full_path%" (
+    echo Test class not found: %full_path%
     echo.
     goto menu
 )
 
 echo.
 echo ================================================================
-echo Running %test_class%...
+echo Running %full_path%...
 echo ================================================================
 echo.
 
@@ -132,7 +152,7 @@ IF EXIST allure-results rmdir /s /q allure-results
 mkdir allure-results
 
 REM Run specific test class
-python -m pytest -v TEST_CLASS\%test_class% --alluredir=allure-results
+python -m pytest -v %full_path% --alluredir=allure-results
 
 goto generate_report
 
@@ -153,10 +173,10 @@ if %errorlevel% neq 0 (
 )
 
 REM Get MySQL credentials
-set /p mysql_user=Enter MySQL username (default: root): 
+set /p mysql_user=Enter MySQL username (default: root):
 if "!mysql_user!"=="" set mysql_user=root
 
-set /p mysql_password=Enter MySQL password: 
+set /p mysql_password=Enter MySQL password:
 
 REM Execute the SQL script
 mysql -u !mysql_user! -p!mysql_password! < TEST_DATA\setup_test_db.sql
